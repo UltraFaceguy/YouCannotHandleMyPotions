@@ -1,0 +1,14 @@
+junior-energy-bottle:
+  potion-id: 1
+  display-name: "&energysassss"
+  flavor-text:
+    - "AAAAAAAAAAAAA"
+  max-doses: 3
+  refill-speed: 200
+  level-requirement: 1
+  instant-health: 20
+  health-recovery: 20
+  health-recovery-ticks: 40
+  instant-energy: 1000
+  energy-recovery: 10
+  energy-recovery-ticks: 20

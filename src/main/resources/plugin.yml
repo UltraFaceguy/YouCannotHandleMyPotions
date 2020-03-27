@@ -1,0 +1,15 @@
+name: YouCannotHandleMyPotions
+version: 1.0.0
+main: land.face.potions.PotionPlugin
+author: Faceguy
+description: Allows customModelData based potions
+depend:
+  - Facecore
+  - Strife
+api-version: 1.15
+
+commands:
+  repair:
+    usage: /<command>
+    aliases: [potionseller]
+    description: potionz
