@@ -30,11 +30,11 @@
   <parent>
     <groupId>io.pixeloutlaw</groupId>
     <artifactId>spigot-plugin-parent</artifactId>
-    <version>1.15.1.4</version>
+    <version>1.15.2.0</version>
   </parent>
 
   <artifactId>YouCannotHandleMyPotions</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
 
   <name>YouCannotHandleMyPotions</name>
@@ -67,6 +67,11 @@
       <groupId>io.pixeloutlaw</groupId>
       <artifactId>strife</artifactId>
       <version>3.0.2-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.UltraFaceguy</groupId>
+      <artifactId>FacelandMarket</artifactId>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 

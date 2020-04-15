@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import land.face.potions.commands.BaseCommand;
+import land.face.potions.listeners.ItemListListener;
 import land.face.potions.listeners.PotionDrankListener;
 import land.face.potions.managers.PotionManager;
 import land.face.potions.tasks.ChargeTimer;
@@ -53,6 +54,7 @@ public class PotionPlugin extends JavaPlugin {
     settings = MasterConfiguration.loadFromFiles(configYAML);
 
     Bukkit.getPluginManager().registerEvents(new PotionDrankListener(this), this);
+    Bukkit.getPluginManager().registerEvents(new ItemListListener(this), this);
 
     potionManager.loadAllPotions(potionYAML);
 
