@@ -1,6 +1,7 @@
 package land.face.potions.managers;
 
-import com.tealcube.minecraft.bukkit.TextUtils;
+import com.google.common.collect.Sets;
+import com.tealcube.minecraft.bukkit.facecore.utilities.TextUtils;
 import io.pixeloutlaw.minecraft.spigot.config.VersionedSmartYamlConfiguration;
 import io.pixeloutlaw.minecraft.spigot.hilt.ItemStackExtensionsKt;
 import java.util.ArrayList;
@@ -8,9 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import land.face.potions.PotionPlugin;
 import land.face.potions.data.Potion;
 import land.face.strife.StrifePlugin;
+import land.face.strife.data.TargetResponse;
 import land.face.strife.util.ItemUtil;
 import land.face.strife.util.PlayerDataUtil;
 import org.bukkit.ChatColor;
@@ -21,12 +24,15 @@ import org.bukkit.inventory.ItemStack;
 
 public class PotionManager {
 
-  private Map<Integer, Potion> potionMap = new HashMap<>();
-  private Map<String, Integer> potionIdMap = new HashMap<>();
+  private final Map<Integer, Potion> potionMap = new HashMap<>();
+  private final Map<String, Integer> potionIdMap = new HashMap<>();
 
-  private static ChatColor[] colors = ChatColor.values();
+  private static final ChatColor[] colors = ChatColor.values();
+  private final Random random = new Random();
 
-  private Random random = new Random();
+  public Set<String> getPotionIds() {
+    return potionIdMap.keySet();
+  }
 
   public Potion getPotion(String potionId) {
     int intId = potionIdMap.getOrDefault(potionId, -1);
@@ -78,8 +84,7 @@ public class PotionManager {
           + PotionPlugin.ONE_DECIMAL.format((double) potion.getEnergyTicks() / 20) + "s");
     }
     lore.addAll(potion.getFlavorText());
-    ItemStackExtensionsKt.setLore(stack, TextUtils.color(lore));
-    System.out.println("data: " + data);
+    TextUtils.setLore(stack, lore, true);
     return stack;
   }
 
@@ -113,9 +118,10 @@ public class PotionManager {
           .restoreEnergyOverTime(player, potion.getEnergyOverTime(), potion.getEnergyTicks());
     }
     if (!potion.getStrifeEffects().isEmpty()) {
-      StrifePlugin.getInstance().getEffectManager()
-          .execute(StrifePlugin.getInstance().getStrifeMobManager().getStatMob(player), player,
-              potion.getStrifeEffects());
+      TargetResponse targetResponse = new TargetResponse(Sets.newHashSet(player));
+      StrifePlugin.getInstance().getEffectManager().processEffectList(
+          StrifePlugin.getInstance().getStrifeMobManager().getStatMob(player),
+          targetResponse, potion.getStrifeEffects());
     }
     player.setCooldown(Material.GLASS_BOTTLE, 200);
   }

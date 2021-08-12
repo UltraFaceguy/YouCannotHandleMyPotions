@@ -29,12 +29,12 @@
 
   <parent>
     <groupId>io.pixeloutlaw</groupId>
-    <artifactId>spigot-plugin-parent</artifactId>
-    <version>1.15.2.0</version>
+    <artifactId>generic-plugin-parent</artifactId>
+    <version>1.17.1.0</version>
   </parent>
 
   <artifactId>YouCannotHandleMyPotions</artifactId>
-  <version>1.0.1</version>
+  <version>1.2.0</version>
   <packaging>jar</packaging>
 
   <name>YouCannotHandleMyPotions</name>
@@ -43,35 +43,36 @@
 
   <repositories>
     <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
+      <id>space-faceland-maven</id>
+      <url>https://maven.pkg.jetbrains.space/faceland/p/fl/faceland-maven</url>
     </repository>
     <repository>
-      <id>spigot-repo</id>
-      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
     </repository>
   </repositories>
 
   <dependencies>
     <dependency>
-      <groupId>org.spigotmc</groupId>
-      <artifactId>spigot-api</artifactId>
+      <groupId>io.pixeloutlaw</groupId>
+      <artifactId>facecore</artifactId>
+      <version>1.17.1.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.pixeloutlaw</groupId>
-      <artifactId>facecore</artifactId>
-      <version>1.15.1.4</version>
+      <groupId>io.papermc.paper</groupId>
+      <artifactId>paper-api</artifactId>
     </dependency>
     <dependency>
       <groupId>io.pixeloutlaw</groupId>
       <artifactId>strife</artifactId>
-      <version>3.0.2-SNAPSHOT</version>
+      <version>3.5.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.UltraFaceguy</groupId>
+      <groupId>io.pixeloutlaw</groupId>
       <artifactId>FacelandMarket</artifactId>
-      <version>1.0.0</version>
+      <version>1.1.0</version>
     </dependency>
   </dependencies>
 
@@ -99,7 +100,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.javaVersion>1.8</project.build.javaVersion>
+    <project.build.javaVersion>16</project.build.javaVersion>
   </properties>
 
 </project>

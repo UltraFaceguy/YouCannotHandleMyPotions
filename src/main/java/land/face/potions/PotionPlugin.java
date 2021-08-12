@@ -1,5 +1,6 @@
 package land.face.potions;
 
+import com.tealcube.minecraft.bukkit.shade.acf.PaperCommandManager;
 import io.pixeloutlaw.minecraft.spigot.config.MasterConfiguration;
 import io.pixeloutlaw.minecraft.spigot.config.VersionedConfiguration;
 import io.pixeloutlaw.minecraft.spigot.config.VersionedSmartYamlConfiguration;
@@ -7,7 +8,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import land.face.potions.commands.BaseCommand;
+import land.face.potions.commands.PotionCommand;
 import land.face.potions.listeners.ItemListListener;
 import land.face.potions.listeners.PotionDrankListener;
 import land.face.potions.managers.PotionManager;
@@ -15,7 +16,6 @@ import land.face.potions.tasks.ChargeTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
-import se.ranzdo.bukkit.methodcommand.CommandHandler;
 
 public class PotionPlugin extends JavaPlugin {
 
@@ -24,13 +24,7 @@ public class PotionPlugin extends JavaPlugin {
   public static final DecimalFormat ONE_DECIMAL = new DecimalFormat("#.#");
 
   private PotionManager potionManager;
-
   private MasterConfiguration settings;
-  private VersionedSmartYamlConfiguration configYAML;
-  private VersionedSmartYamlConfiguration potionYAML;
-
-  private CommandHandler commandHandler;
-
   private ChargeTimer chargeTimer;
 
   public static PotionPlugin getInstance() {
@@ -42,7 +36,9 @@ public class PotionPlugin extends JavaPlugin {
     potionManager = new PotionManager();
 
     List<VersionedSmartYamlConfiguration> configurations = new ArrayList<>();
+    VersionedSmartYamlConfiguration configYAML;
     configurations.add(configYAML = defaultSettingsLoad("config.yml"));
+    VersionedSmartYamlConfiguration potionYAML;
     configurations.add(potionYAML = defaultSettingsLoad("potions.yml"));
 
     for (VersionedSmartYamlConfiguration config : configurations) {
@@ -58,8 +54,11 @@ public class PotionPlugin extends JavaPlugin {
 
     potionManager.loadAllPotions(potionYAML);
 
-    commandHandler = new CommandHandler(this);
-    commandHandler.registerCommands(new BaseCommand(this));
+    PaperCommandManager commandManager = new PaperCommandManager(this);
+    commandManager.registerCommand(new PotionCommand(this));
+    commandManager.getCommandCompletions()
+        .registerCompletion("potions", c -> potionManager.getPotionIds());
+
 
     chargeTimer = new ChargeTimer(this);
 

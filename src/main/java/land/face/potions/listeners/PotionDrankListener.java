@@ -1,7 +1,7 @@
 package land.face.potions.listeners;
 
-import com.tealcube.minecraft.bukkit.TextUtils;
 import com.tealcube.minecraft.bukkit.facecore.utilities.MessageUtils;
+import com.tealcube.minecraft.bukkit.facecore.utilities.TextUtils;
 import land.face.potions.PotionPlugin;
 import land.face.potions.data.Potion;
 import org.bukkit.Material;
@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class PotionDrankListener implements Listener {
 
-  private PotionPlugin plugin;
+  private final PotionPlugin plugin;
 
   public PotionDrankListener(PotionPlugin plugin) {
     this.plugin = plugin;
